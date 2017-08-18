@@ -67,23 +67,23 @@ class Item extends React.Component {
   }
 
   onAction1 () {
-    this.props.onActon1(this.props.id)
+    this.props.onAction1(this.props.id)
   }
 
   onAction2 () {
-    this.props.onActon2(this.props.id)
+    this.props.onAction2(this.props.id)
   }
 
   onAction3 () {
-    this.props.onActon3(this.props.id)
+    this.props.onAction3(this.props.id)
   }
 
   onAction4 () {
-    this.props.onActon4(this.props.id)
+    this.props.onAction4(this.props.id)
   }
 
   onAction5 () {
-    this.props.onActon5(this.props.id)
+    this.props.onAction5(this.props.id)
   }
 }
 ```
@@ -92,26 +92,59 @@ THE SOLUTION
 ============
 
 ```js
-function Item ({ id }) {
+function Item (props) {
   return (<div>
-    <span>{this.props.name}</span>
-    <EventData event='onclick' data={id}>
-      <button onclick={this.onAction1} />
+    <span>{props.name}</span>
+
+    <EventData event='onclick' data={props.id}>
+      <button onclick={props.onAction1} />
     </EventData>
-    <EventData event='onclick' data={id}>
-      <button onclick={this.onAction2} />
+    <EventData event='onclick' data={props.id}>
+      <button onclick={props.onAction2} />
     </EventData>
-    <EventData event='onclick' data={id}>
-      <button onclick={this.onAction3} />
+    <EventData event='onclick' data={props.id}>
+      <button onclick={props.onAction3} />
     </EventData>
-    <EventData event='onclick' data={id}>
-      <button onclick={this.onAction4} />
+    <EventData event='onclick' data={props.id}>
+      <button onclick={props.onAction4} />
     </EventData>
-    <EventData event='onclick' data={id}>
-      <button onclick={this.onAction5} />
+    <EventData event='onclick' data={props.id}>
+      <button onclick={props.onAction5} />
     </EventData>
   </div>)
 }
 ```
 
 See the difference? It's declarative and cleaner. That's it.
+
+
+INSTALLING
+==========
+
+```
+npm install --save react-save-data
+```
+
+USAGE
+=====
+
+```js
+/*
+ * onClick = (id, ev) => {}
+ */
+function Button ({ id, onClick }) {
+  return (<EventData event='onclick' data={id}>
+    <button onclick={onClick}>Click me</button>
+  </EventData>)
+}
+
+/*
+ * TextInput from react-native
+ * onChange = (name, value) => {}
+ */
+function Field ({ name, value, onChange }) {
+  return (<EventData event='onChangeText' data={name}>
+    <TextInput value={value} onChangeText={onChange} />
+  </EventData>)
+}
+```
