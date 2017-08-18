@@ -132,6 +132,8 @@ USAGE
 =====
 
 ```js
+import EventData from 'react-event-data'
+
 /*
  * onClick = (id, ev) => {}
  */
