@@ -56,7 +56,7 @@ class Item extends React.Component {
   }
 
   render () {
-    return (<div onclick={this.onClick}>
+    return (<div>
       <span>{this.props.name}</span>
       <button onclick={this.onAction1} />
       <button onclick={this.onAction2} />
@@ -93,7 +93,7 @@ THE SOLUTION
 
 ```js
 function Item ({ id }) {
-  return (<div onclick={this.onClick}>
+  return (<div>
     <span>{this.props.name}</span>
     <EventData event='onclick' data={id}>
       <button onclick={this.onAction1} />
