@@ -1,6 +1,6 @@
 {
   "name": "react-event-data",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "react custom event data, declarative, clean code",
   "main": "dist/index.js",
   "scripts": {
