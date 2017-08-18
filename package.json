@@ -1,0 +1,25 @@
+{
+  "name": "react-event-data",
+  "version": "1.0.0",
+  "description": "react custom event data, declarative, clean code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thenewvu/react-event-data.git"
+  },
+  "keywords": [
+    "react",
+    "custom",
+    "event",
+    "data"
+  ],
+  "author": "Vu Le <thenewvu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thenewvu/react-event-data/issues"
+  },
+  "homepage": "https://github.com/thenewvu/react-event-data#readme"
+}
