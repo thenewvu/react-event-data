@@ -24,7 +24,9 @@ class Item extends React.Component {
   }
 
   render () {
-    return (<buttom onclick={this.onClick}>{this.props.name}</buttom>)
+    return (<buttom onclick={this.onClick}>
+      {this.props.name}
+    </buttom>)
   }
 
   onClick () {
@@ -38,7 +40,8 @@ function onItemClick (id) {
 
 function List () {
   return (<div>
-    {ids.map(id => <Item id={id} data={data[id]} onClick={onItemClick} />)}
+    {ids.map(id => <Item key={id} id={id}
+      data={data[id]} onClick={onItemClick} />)}
   </div>)
 }
 ```
@@ -122,7 +125,7 @@ INSTALLING
 ==========
 
 ```
-npm install --save react-save-data
+npm install --save react-event-data
 ```
 
 USAGE
@@ -145,6 +148,18 @@ function Button ({ id, onClick }) {
 function Field ({ name, value, onChange }) {
   return (<EventData event='onChangeText' data={name}>
     <TextInput value={value} onChangeText={onChange} />
+  </EventData>)
+}
+
+/*
+ * TouchableOpacity from react-native
+ * onPress = (id, ev) => {}
+ */
+function Touchable ({ id, onPress }) {
+  return (<EventData event='onPress' data={id}>
+    <TouchableOpacity onPress={onPress}>
+      <Text>Tap me</Text>
+    </TouchableOpacity>
   </EventData>)
 }
 ```
