@@ -29,7 +29,7 @@
   var _initialiseProps = function () {
     this.render = () => (0, _react.cloneElement)(_react.Children.only(this.props.children), this.enhancedProp);
 
-    this.onEvent = (...args) => _react.Children.only(this.props.children).props.onPress(this.props.data, ...args);
+    this.onEvent = (...args) => _react.Children.only(this.props.children).props[this.props.event](this.props.data, ...args);
 
     this.enhancedProp = { [this.props.event]: this.onEvent };
   };
