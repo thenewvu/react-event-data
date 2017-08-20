@@ -16,21 +16,50 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  class EventData extends _react.Component {
-    constructor(...args) {
-      var _temp;
 
-      return _temp = super(...args), _initialiseProps.call(this), _temp;
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0) continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+      target[i] = obj[i];
     }
 
+    return target;
+  }
+
+  class EventData extends _react.Component {
+    constructor(props) {
+      super(props);
+      this.createEnhancedProps();
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.event !== this.props.event) {
+        this.createEnhancedProps();
+      }
+    }
+
+    render() {
+      const target = _react.Children.only(this.props.children);
+      return (0, _react.cloneElement)(target, this.enhancedProp);
+    }
+
+    createEnhancedProps() {
+      const _props = this.props,
+            { children, event, data } = _props,
+            rest = _objectWithoutProperties(_props, ['children', 'event', 'data']);
+      this.enhancedProp = Object.assign({
+        [event]: (...args) => {
+          const target = _react.Children.only(children);
+          const eventHandle = target.props[event];
+          if (typeof eventHandle === 'function') {
+            eventHandle(data, ...args);
+          }
+        }
+      }, rest);
+    }
   }
   exports.default = EventData;
-
-  var _initialiseProps = function () {
-    this.render = () => (0, _react.cloneElement)(_react.Children.only(this.props.children), this.enhancedProp);
-
-    this.onEvent = (...args) => _react.Children.only(this.props.children).props[this.props.event](this.props.data, ...args);
-
-    this.enhancedProp = { [this.props.event]: this.onEvent };
-  };
 });

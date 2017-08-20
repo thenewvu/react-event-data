@@ -25,7 +25,33 @@ SOFTWARE.
 import { Children, Component, cloneElement } from 'react'
 
 export default class EventData extends Component {
-  render = () => cloneElement(Children.only(this.props.children), this.enhancedProp)
-  onEvent = (...args) => Children.only(this.props.children).props[this.props.event](this.props.data, ...args)
-  enhancedProp = { [this.props.event]: this.onEvent }
+  constructor (props) {
+    super(props)
+    this.createEnhancedProps()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.event !== this.props.event) {
+      this.createEnhancedProps()
+    }
+  }
+
+  render () {
+    const target = Children.only(this.props.children)
+    return cloneElement(target, this.enhancedProp)
+  }
+
+  createEnhancedProps () {
+    const { children, event, data, ...rest } = this.props
+    this.enhancedProp = {
+      [event]: (...args) => {
+        const target = Children.only(children)
+        const eventHandle = target.props[event]
+        if (typeof eventHandle === 'function') {
+          eventHandle(data, ...args)
+        }
+      },
+      ...rest
+    }
+  }
 }
