@@ -36,9 +36,7 @@
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.event !== this.props.event) {
-        this.createEnhancedProps();
-      }
+      this.createEnhancedProps();
     }
 
     render() {
